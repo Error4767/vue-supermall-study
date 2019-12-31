@@ -1,0 +1,13 @@
+:root {
+  --tint: #ff8198;
+}
+.clear-fix::before {
+  content: '';
+  display: table;
+  clear: both;
+}
+.clear-fix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
