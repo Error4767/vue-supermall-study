@@ -15,6 +15,9 @@ export default {
   components: {
     home,
     tabBar
+  },
+  created() {
+    console.log('dev');
   }
 }
 </script>
