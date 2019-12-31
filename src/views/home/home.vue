@@ -175,9 +175,6 @@
       });
       //console.log(getComputedStyle(document.querySelector('.wrapper'), null)['height'],getComputedStyle(document.querySelector('.content'), null)['height']);
     },
-    destroyed() {
-      console.log('destroyed');
-    },
     activated() {
       console.log('activated');
       this.$refs.scroll.scrollTo(0, this.scrollY, 0);
