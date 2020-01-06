@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
-    <tab-bar></tab-bar>
+    <div class="content">
+      <keep-alive exclude="detail">
+        <router-view></router-view>
+      </keep-alive>
+    </div>
+    <tab-bar class="tab-bar"></tab-bar>
   </div>
 </template>
 
@@ -32,4 +34,7 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+  .tab-bar {
+    z-index: 50;
+  }
 </style>

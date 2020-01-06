@@ -1,10 +1,8 @@
 <template>
   <div class="swiper-container" ref="swiperContainer">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="item in banners" :key="item.image">
-        <a :href="item.link" class="swiper-item-a" target="_blank">
-          <img :src="item.image" :alt="item.title" class="swiper-item-img" @load.once="loadedImage">
-        </a>
+      <div class="swiper-slide" v-for="(img, i) in goods.images" :key="i">
+        <img :src="img" :alt="goods.title" class="swiper-item-img" @load.once="loadedImage">
       </div>
     </div>
     <!-- Add Pagination -->
@@ -17,7 +15,7 @@
   import '_node_modules/swiper/css/swiper.css';
   export default {
     name: "homeSwiper",
-    props: ['banners'],
+    props: ['goods'],
     data() {
       return {
         swiperAlreadyInit: false
@@ -41,7 +39,8 @@
       }
     },
     watch: {
-      banners() {
+      goods() {
+        console.log(this.goods);
         // swiper只会初始化一次
         if(!this.swiperAlreadyInit) {
           this.initSwiper();
@@ -53,20 +52,15 @@
 </script>
 
 <style scoped>
-  .swiper-item-a {
-    width: 100%;
-    font-size: 0;/*去除行距*/
-    text-decoration: none;
-  }
   .swiper-item-img {
+    position: absolute;
+    top: 0;
     width: 100%;
-    height: 100%;
   }
   .swiper-container {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 14px;
     width: 100%;
-    height: 100%;
   }
   .swiper-slide {
     text-align: center;

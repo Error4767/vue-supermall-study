@@ -1,18 +1,22 @@
 <template>
-  <navBar>
+  <nav-bar>
     <div class="back" slot="left" @click="itemBack">
-      <img src="~@/assets/img/default/back.svg" alt="">
+      <span>
+        <img src="~@/assets/img/default/back.svg" alt="">
+      </span>
     </div>
-    <div class="title" slot="center" v-for="(item, i) in titles" @click="itemClick">
-      titles[i]
+    <div slot="center" class="center">
+      <div class="title" v-for="item in titles" @click="itemClick">
+        {{item}}
+      </div>
     </div>
-  </navBar>
+  </nav-bar>
 </template>
 
 <script>
-  import navBar from '@/components/common/navBar';
+  import navBar from '@/components/common/navbar';
   export default {
-    name: "navBar",
+    name: "detailNavBar",
     data() {
       return {
         titles: ['商品', '参数', '评论', '推荐']
@@ -34,17 +38,25 @@
 
 <style lang="scss" scoped>
   .back {
-    height:100%;
+    height: $nav-bar-height;
+    display: inline-block;
   }
   .back img {
-    height: 100%;
+    height: 70%;
+    vertical-align: middle;
+  }
+  .center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: $color-background;
   }
   .title {
-    height: 100%;
-    line-height: 100%;
+    height: $nav-bar-height;
+    line-height: $nav-bar-height;
     text-align: center;
-    font-size: 12px;
+    font-size: $font-size-secondary-menu;
     color: $color-text;
-    margin: 0 5px 0 5px;
+    margin: 0 8px 0 8px;
   }
 </style>

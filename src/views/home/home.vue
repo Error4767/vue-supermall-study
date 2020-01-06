@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <nav-bar>
+    <nav-bar class="navBar">
       <div slot="center">
         购物街
       </div>
@@ -191,6 +191,9 @@
 <style lang="scss" scoped>
   .home {
     width: 100%;
+  }
+  .navBar {
+    background-color: $color-tint;
   }
   .scroll {
     height: calc(100vh - 50px);
