@@ -1,6 +1,6 @@
 <template>
-  <div class="goodsItem">
-    <a :href="goodsItem.link" target="_blank">
+  <div class="goodsItem" @click="itemClick">
+    <a @click="itemClick" target="_blank">
       <img class="item-img" :src="goodsItem.show.img" alt="goodsItem.title" @load="itemImageLoaded">
       <div class="title">{{goodsItem.title}}</div>
     </a>
@@ -26,6 +26,14 @@
     methods: {
       itemImageLoaded() {
         this.$bus.$emit('itemImageLoaded');
+      },
+      itemClick() {
+        this.$router.push({
+          path: '/detail',
+          query: {
+            id: this.goodsItem.iid
+          }
+        });
       }
     }
   }
