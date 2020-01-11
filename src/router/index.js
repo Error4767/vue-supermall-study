@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 let home = ()=> import('@/views/home/home.vue');
-let detail = ()=> import('@/views/detail/detail');
+let detail = ()=> import('@/views/detail/detail.vue');
 
 Vue.use(Router);
 

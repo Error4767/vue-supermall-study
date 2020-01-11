@@ -31,8 +31,7 @@ module.exports = {
         def2: '"def2"'
       }),
       new webpack.ProvidePlugin({
-        vuex1: 'vuex',
-        baseFunction: '@/common/baseFunction.js'
+        vuex1: 'vuex'
       })
     ]
   }

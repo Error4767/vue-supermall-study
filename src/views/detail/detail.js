@@ -1,4 +1,4 @@
-export default class Goods{
+export class Goods{
   constructor(res) {
     let result = res.result;
     let itemInfo = result.itemInfo;
@@ -10,5 +10,17 @@ export default class Goods{
     this.price = itemInfo.price;
     this.oldPrice = itemInfo.oldPrice;
     this.discountBgColor = itemInfo.discountBgColor;
+  }
+}
+export class Shop {
+  constructor(res) {
+    let result = res.result;
+    let shopInfo = result.shopInfo;
+    this.logo = shopInfo.shopLogo;
+    this.name = shopInfo.name;
+    this.fans = shopInfo.cFans;
+    this.sells = shopInfo.cSells;
+    this.score = shopInfo.score;
+    this.goodsCount = shopInfo.cGoods;
   }
 }

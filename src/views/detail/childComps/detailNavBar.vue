@@ -6,8 +6,8 @@
       </span>
     </div>
     <div slot="center" class="center">
-      <div class="title" v-for="item in titles" @click="itemClick">
-        {{item}}
+      <div class="title" v-for="(item, i) in titles" @click="itemClick(i)" :class="{active: i === currentIndex}">
+        <span>{{item}}</span>
       </div>
     </div>
   </nav-bar>
@@ -19,7 +19,8 @@
     name: "detailNavBar",
     data() {
       return {
-        titles: ['商品', '参数', '评论', '推荐']
+        titles: ['商品', '参数', '评论', '推荐'],
+        currentIndex: 0
       }
     },
     components: {
@@ -29,8 +30,8 @@
       itemBack() {
         this.$router.go(-1);
       },
-      itemClick() {
-
+      itemClick(i) {
+        this.currentIndex = i;
       }
     }
   }
@@ -40,6 +41,9 @@
   .back {
     height: $nav-bar-height;
     display: inline-block;
+  }
+  .active span{
+    color: $color-tint;
   }
   .back img {
     height: 70%;

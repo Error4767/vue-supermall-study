@@ -165,11 +165,11 @@
     created() {
       this.initHomeMultiData();
       this.loadHomeGoods();
-      this.finishPullUp = baseFunction.debounce(this.finishPullUp, 500);
+      this.finishPullUp = this.utils.debounce(this.finishPullUp, 500);
     },
     mounted() {
-      console.log(baseFunction);
-      let refresh = baseFunction.debounce(this.refreshScrollContent, 50);
+      console.log(this.utils);
+      let refresh = this.utils.debounce(this.refreshScrollContent, 50);
       this.$bus.$on('itemImageLoaded', ()=> {
         refresh();
       });

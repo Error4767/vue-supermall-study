@@ -1,46 +1,64 @@
 <template>
   <div class="detail">
-    <detail-nav-bar></detail-nav-bar>
-    <detail-swiper class="swiper" :goods="goods"></detail-swiper>
-    <div class="goodsTitle">
-      {{goods.title}}
-    </div>
-    <div class="price">
-      <div class="currentPrice">
-        {{goods.price}}
+    <detail-nav-bar class="nav-bar"></detail-nav-bar>
+    <scroll class="scroll" ref="scroll">
+      <div class="content">
+        <detail-swiper class="swiper" :goods="goods"></detail-swiper>
+        <goods-info :goodsInfo="goodsInfo"></goods-info>
+        <shop-info :shopInfo='shopInfo'></shop-info>
+        <comment-info :commentInfo="commentInfo"></comment-info>
+        <goods-images :detailInfo="detailInfo" @imageLoaded="imageLoaded"></goods-images>
+        <params-info :paramsInfo="paramsInfo"></params-info>
       </div>
-      <div class="oldPrice">
-        {{goods.oldPrice}}
-      </div>
-      <activity-price class="activity-price"></activity-price>
-    </div>
-    <div class="columns">
-      <div class="columns-item" v-for="item in goods.columns">
-        {{item}}
-      </div>
-    </div>
+    </scroll>
   </div>
 </template>
 
 <script>
+
+  //component
+  import scroll from '@/components/common/scroll/scroll';
   import detailNavBar from './childComps/detailNavBar';
-  import detailSwiper from '@/components/content/swiper/detailSwiper';
+  import detailSwiper from './childComps/detailSwiper';
+  import goodsInfo from './childComps/goodsInfo';
+  import shopInfo from './childComps/shopInfo';
+  import goodsImages from './childComps/goodsImages';
+  import paramsInfo from './childComps/paramsInfo';
+  import commentInfo from './childComps/commentInfo';
+  //request
   import {getDetail}  from '@/network/detail.js';
-  import Goods from './detailResDataHandle';
-  import activityPrice from '@/components/common/activityPrice';
+
+  //handleData
+  import {Goods} from './detail.js';
+  import {Shop} from './detail.js';
   export default {
     name: "detail",
     data() {
       return {
         id: null,
         topImages: [],
-        goods: {}
+        goods:{},
+        goodsInfo: {},
+        shopInfo: {},
+        detailInfo: {},
+        paramsInfo: {},
+        commentInfo: {}
       }
     },
     components: {
+      scroll,
       detailNavBar,
       detailSwiper,
-      activityPrice
+      goodsInfo,
+      shopInfo,
+      goodsImages,
+      paramsInfo,
+      commentInfo
+    },
+    methods: {
+      imageLoaded() {
+        this.$refs.scroll.scroll.refresh();
+      }
     },
     created() {
       console.log('detail created');
@@ -48,9 +66,24 @@
       getDetail(this.id).then((res)=> {
         let data = res.result;
         console.log(res);
+
         let goods = new Goods(res);
         this.goods = goods;
-        console.log(goods);
+
+        //商品信息
+        this.goodsInfo = goods;
+
+        //店铺信息
+        this.shopInfo = new Shop(res);
+
+        //商品详细信息
+        this.detailInfo = data.detailInfo;
+
+        //商品参数
+        this.paramsInfo = data.itemParams;
+
+        //商品评论
+        this.commentInfo = data.rate;
       })
     },
     activated() {
@@ -66,53 +99,24 @@
 </script>
 
 <style lang="scss" scoped>
+  .nav-bar {
+    background-color: $color-background;
+  }
   .detail {
     position: relative;
     width: 100%;
     height: 100%;
+    z-index: 51;
+    background-color: $color-background;
+  }
+  .scroll {
+    height: calc(100vh - 44px);
+    overflow: hidden;
   }
   .swiper {
     display: block;
     width: 100%;
     padding-bottom: 100%;
     overflow: hidden;
-  }
-  .goodsTitle {
-    font-size: 16px;
-    margin: 12px;
-    text-align: left;
-  }
-  .columns {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 15px;
-    margin: 5px 12px 5px 12px;
-  }
-  .columns-item {
-    line-height: 15px;
-    font-size: 10px;
-    color: #666;
-  }
-  .price {
-    height: 25px;
-    margin: 15px 12px 15px 12px;
-    display: flex;
-    justify-content: left;
-    align-items: flex-end;
-  }
-  .currentPrice {
-    font-size: 20px;
-    color: $color-tint;
-    margin-right: 8px;
-  }
-  .oldPrice {
-    font-size: 14px;
-    text-decoration: line-through;
-    color: #666;
-    margin-right: 8px;
-  }
-  .activity-price {
-    align-self: flex-start;
   }
 </style>

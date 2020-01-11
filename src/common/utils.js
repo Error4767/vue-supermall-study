@@ -1,3 +1,9 @@
+import {formatDate} from './utils/formatDate.js';
+
+export {
+  formatDate
+}
+
 export function debounce(fn, delay, self) {
   let timer = null;
   return function(...args) {

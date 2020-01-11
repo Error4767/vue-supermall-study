@@ -18,7 +18,7 @@
     },
     methods: {
       randomId(length = 10) {
-        return baseFunction.randomID(length);
+        return this.utils.randomID(length);
       }
     },
     components: {
