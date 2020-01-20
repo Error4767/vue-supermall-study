@@ -1,4 +1,3 @@
-<script src="../../../../../../../function/functions/src/formatDate.js"></script>
 <template>
   <div class="comment-info" v-if="Object.keys(commentInfo).length > 0">
     <div class="info-header">
@@ -37,7 +36,7 @@
     },
     methods: {
       formatDate(v) {
-        return this.utils.formatDate(new Date(v * 1000), 'yyyy-MM-dd hh:mm');
+        return utils.formatDate(new Date(v * 1000), 'yyyy-MM-dd hh:mm');
       }
     }
   }

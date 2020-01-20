@@ -22,7 +22,7 @@
       }
     },
     created() {
-      this.imageLoaded = this.utils.debounce(this.imageLoaded, 100);
+      this.imageLoaded = utils.debounce(this.imageLoaded, 100);
     }
   }
 </script>

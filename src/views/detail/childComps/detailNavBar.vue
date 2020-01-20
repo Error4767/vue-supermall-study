@@ -32,6 +32,7 @@
       },
       itemClick(i) {
         this.currentIndex = i;
+        this.$emit('itemClick', i);
       }
     }
   }

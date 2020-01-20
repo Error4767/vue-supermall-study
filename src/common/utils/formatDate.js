@@ -24,8 +24,7 @@ export function formatDate(date, format) {
 		currentFormat = currentFormat instanceof Array ? currentFormat[0] : '';
 		if(currentFormat) {
 			let length = String(currentFormat).length;
-			let padString = new Array(length).fill('0').join('');
-			format = format.replace(currentFormat, length === 1 ? o[key] : (padString + o[key]).substr(String(o[key]).length));
+			format = format.replace(currentFormat, length === 1 ? o[key] : ('00' + o[key]).substr(String(o[key]).length));
 		}
 	}
 	return format;

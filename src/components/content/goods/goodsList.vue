@@ -1,6 +1,6 @@
 <template>
   <div class="goods">
-    <goods-list-item v-for="item in goods" :goodsItem="item" :key="randomId(10)"></goods-list-item>
+    <goods-list-item v-for="item in goods" :goodsItem="item" :key="randomId()"></goods-list-item>
   </div>
 </template>
 
@@ -18,7 +18,7 @@
     },
     methods: {
       randomId(length = 10) {
-        return this.utils.randomID(length);
+        return utils.randomID(length);
       }
     },
     components: {

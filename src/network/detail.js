@@ -7,3 +7,8 @@ export function getDetail(iid) {
     }
   });
 }
+export function getRecommends() {
+  return request({
+    url: '/recommend'
+  });
+}

@@ -20,7 +20,7 @@
         <swiper class="swiper"
                 :banners="banners"
                 @loadedImage="initOffsetTop"></swiper>
-        <recommend class="recommend" :recommends="recommends"></recommend>
+        <recommend class="recommend" :recommends="recommends" @imageLoaded="initOffsetTop"></recommend>
         <tab-control class="tab-control"
                      :titles="titles"
                      @tabClick="tabClick"
@@ -159,28 +159,44 @@
         this.$refs.scroll.scroll.finishPullUp();
       },
       refreshScrollContent() {
+        console.log('home refresh');
         this.$refs.scroll.scroll.refresh();
       }
     },
     created() {
+      let ii = 0;
+      let fn = utils.throttle(()=> {
+        ii++;
+        let r = ii ** 2;
+        console.log(r);
+        //return r;
+      }, 1500)
+      console.log(fn);
+
+      // setInterval(()=> {
+      //   console.log(fn());
+      // }, 10);
+      this.initOffsetTop = utils.debounce(this.initOffsetTop, 50);
+      console.log('home created');
       this.initHomeMultiData();
       this.loadHomeGoods();
-      this.finishPullUp = this.utils.debounce(this.finishPullUp, 500);
+      this.finishPullUp = utils.debounce(this.finishPullUp, 500);
     },
     mounted() {
-      console.log(this.utils);
-      let refresh = this.utils.debounce(this.refreshScrollContent, 50);
-      this.$bus.$on('itemImageLoaded', ()=> {
-        refresh();
-      });
+      this.itemImageListener = utils.debounce(this.refreshScrollContent, 100);
       //console.log(getComputedStyle(document.querySelector('.wrapper'), null)['height'],getComputedStyle(document.querySelector('.content'), null)['height']);
     },
     activated() {
+      this.$bus.$on('itemImageLoaded', this.itemImageListener);
+      console.log(this.$bus._events.itemImageLoaded.length, this.$bus);
       console.log('activated');
       this.$refs.scroll.scrollTo(0, this.scrollY, 0);
       this.refreshScrollContent();
     },
     deactivated() {
+      console.log(this.$bus._events.itemImageLoaded.length, this.$bus);
+      this.$bus.$off('itemImageLoaded', this.itemImageListener);
+      console.log(this.$bus._events.itemImageLoaded.length, this.$bus);
       this.scrollY = this.$refs.scroll.getScrollY();
       console.log(this.scrollY);
       console.log('deactivated');

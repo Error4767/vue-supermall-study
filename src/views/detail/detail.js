@@ -10,6 +10,7 @@ export class Goods{
     this.price = itemInfo.price;
     this.oldPrice = itemInfo.oldPrice;
     this.discountBgColor = itemInfo.discountBgColor;
+    this.realPrice = itemInfo.lowNowPrice;
   }
 }
 export class Shop {

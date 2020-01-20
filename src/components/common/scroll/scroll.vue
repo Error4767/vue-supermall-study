@@ -25,7 +25,7 @@
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad
       });
-      if(this.probeType === 2 || this.probeType === 3) {
+      if(this.probeType === 1 || this.probeType === 2 || this.probeType === 3) {
         this.scroll.on('scroll', (position)=> {
           this.$emit('scroll', position);
         });
@@ -37,7 +37,7 @@
       }
     },
     methods: {
-      scrollTo(x, y, time) {
+      scrollTo(x, y, time = 50) {
         this.scroll.scrollTo(x, y, time);
       },
       getScrollY() {
