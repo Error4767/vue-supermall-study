@@ -98,6 +98,7 @@
           price: this.goodsInfo.realPrice,
           id: this.id
         }
+        console.log(this.topImages);
         this.$store.dispatch('addCart', product);
       }
     },
@@ -115,6 +116,7 @@
 
         let goods = new Goods(res);
         this.goods = goods;
+        this.topImages = goods.images;
 
         //商品信息
         this.goodsInfo = goods;

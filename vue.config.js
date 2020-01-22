@@ -31,7 +31,7 @@ module.exports = {
         def2: '"def2"'
       }),
       new webpack.ProvidePlugin({
-        vuex1: 'vuex'
+        utils: __dirname + '/src/common/utils.js'
       })
     ]
   }
