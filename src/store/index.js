@@ -21,13 +21,17 @@ const store = new Vuex.Store({
   },
   actions: {
     addCart(context, payload) {
-      let oldProduct = context.state.cartList.find((v)=> v.id === payload.id);
-      if(oldProduct) {
-        context.commit('addCounter', oldProduct);
-      }else {
-        payload.count = 1;
-        context.commit('addToCart', payload);
-      }
+      return new Promise((resolve, reject)=> {
+        let oldProduct = context.state.cartList.find((v)=> v.id === payload.id);
+        if(oldProduct) {
+          context.commit('addCounter', oldProduct);
+          resolve('addCounter');
+        }else {
+          payload.count = 1;
+          context.commit('addToCart', payload);
+          resolve('addToCart');
+        }
+      });
     }
   },
   modules: {

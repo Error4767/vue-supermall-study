@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import Swiper from '_swiper@5.2.1@swiper';
+  import Swiper from 'swiper';
   import '_node_modules/swiper/css/swiper.css';
   export default {
     name: "homeSwiper",

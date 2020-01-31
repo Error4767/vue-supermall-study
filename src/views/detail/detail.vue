@@ -30,6 +30,7 @@
   import goodsList from '@/components/content/goods/goodsList';
   import detailBottomBar from './childComps/detailBottomBar';
   import backTop from '@/components/content/backTop/backTop';
+
   //request
   import {getDetail}  from '@/network/detail.js';
   import {getRecommends} from '@/network/detail.js';
@@ -99,7 +100,14 @@
           id: this.id
         }
         console.log(this.topImages);
-        this.$store.dispatch('addCart', product);
+        this.$store.dispatch('addCart', product).then((result)=> {
+          console.log(result);
+          if(result === 'addToCart') {
+            this.$toast.show('添加了新的商品');
+          }else if (result === 'addCounter') {
+            this.$toast.show('当前的商品数量+1');
+          }
+        });
       }
     },
     created() {
