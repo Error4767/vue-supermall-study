@@ -24,7 +24,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.3.2",
     "fibers": "^4.0.2",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "postcss-px-to-viewport": "^1.1.1",
     "sass": "^1.23.7",
     "sass-loader": "^8.0.0",
